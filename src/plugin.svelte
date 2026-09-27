@@ -25,7 +25,7 @@
             <div>经度：{result.lon.toFixed(6)}</div>
             <div class="actions">
                 <button type="button" on:click={copyCoordinates}>复制坐标</button>
-                <a href={windyUrl}>打开此处天气</a>
+                <button type="button" on:click={openWeather}>打开此处天气</button>
             </div>
             {#if copied}<p class="hint">已复制：纬度, 经度</p>{/if}
         </div>
@@ -48,10 +48,6 @@
     let error = '';
     let copied = false;
     let marker: L.Marker | null = null;
-
-    $: windyUrl = result
-        ? `https://www.windy.com/${result.lat.toFixed(6)}/${result.lon.toFixed(6)}?${result.lat.toFixed(6)},${result.lon.toFixed(6)},${locationZoom}`
-        : '';
 
     function clearResult(): void {
         result = null;
@@ -86,6 +82,12 @@
         }
     }
 
+    function openWeather(): void {
+        if (!result) return;
+        map.setView([result.lat, result.lon], locationZoom);
+        bcast.emit('rqstOpen', 'detail', { lat: result.lat, lon: result.lon, source: 'api' });
+    }
+
     onDestroy(() => marker?.remove());
 </script>
 
@@ -95,7 +97,7 @@
         label { display: block; margin: 16px 0 6px; font-weight: 600; }
         select, textarea { box-sizing: border-box; width: 100%; padding: 9px; border: 1px solid #aaa; border-radius: 5px; background: white; color: #222; font: inherit; }
         textarea { resize: vertical; }
-        button, .actions a { display: inline-block; margin-top: 12px; padding: 9px 12px; border: 0; border-radius: 5px; background: #f05a28; color: white; font: inherit; cursor: pointer; text-decoration: none; }
+        button { display: inline-block; margin-top: 12px; padding: 9px 12px; border: 0; border-radius: 5px; background: #f05a28; color: white; font: inherit; cursor: pointer; }
         .hint { font-size: 12px; color: #777; }
         .error { color: #c32222; }
         .result { margin-top: 20px; padding: 14px; border: 1px solid #ccc; border-radius: 5px; line-height: 1.8; }
