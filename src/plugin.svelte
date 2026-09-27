@@ -25,7 +25,7 @@
             <div>经度：{result.lon.toFixed(6)}</div>
             <div class="actions">
                 <button type="button" on:click={copyCoordinates}>复制坐标</button>
-                <a href={windyUrl} target="_blank" rel="noopener noreferrer">打开此处天气</a>
+                <a href={windyUrl}>打开此处天气</a>
             </div>
             {#if copied}<p class="hint">已复制：纬度, 经度</p>{/if}
         </div>
