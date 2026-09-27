@@ -1,6 +1,6 @@
 {
     "name": "windy-plugin-2bulu-coordinates",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Convert 2bulu coordinates to Windy WGS84 coordinates",
     "main": "dist/plugin.min.js",
     "type": "module",
