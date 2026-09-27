@@ -2,6 +2,8 @@
 
 基于 [Windy 官方插件模板](https://github.com/windycom/windy-plugin-template)。将两步路显示的十进制经纬度按所选坐标系转换为 Windy 地图使用的 WGS84 经纬度，并在地图上定位。无需账号、API key 或外部坐标转换服务；坐标只在浏览器本地处理。
 
+当前版本安装 URL：[0.1.1 插件链接](https://windy-plugins.com/10506671/windy-plugin-2bulu-coordinates/0.1.1/plugin.min.js)。在 Windy 的“从 URL 加载插件”中粘贴此链接。
+
 ## 使用
 
 1. 在两步路地图顶部确认当前坐标系（GCJ-02、WGS84 或 BD-09），点击经纬度复制。
