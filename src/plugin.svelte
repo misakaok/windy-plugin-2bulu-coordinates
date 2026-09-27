@@ -40,6 +40,7 @@
     import { detectSourceSystem, parseCoordinates, toWgs84, type Coordinates, type CoordinateSystem, type PairOrder } from './coordinates';
 
     const { title } = config;
+    const locationZoom = 15;
     let source: CoordinateSystem = 'GCJ02';
     let order: PairOrder = 'latlon';
     let input = '';
@@ -49,7 +50,7 @@
     let marker: L.Marker | null = null;
 
     $: windyUrl = result
-        ? `https://www.windy.com/${result.lat.toFixed(6)}/${result.lon.toFixed(6)}?${result.lat.toFixed(6)},${result.lon.toFixed(6)},11`
+        ? `https://www.windy.com/${result.lat.toFixed(6)}/${result.lon.toFixed(6)}?${result.lat.toFixed(6)},${result.lon.toFixed(6)},${locationZoom}`
         : '';
 
     function clearResult(): void {
@@ -68,7 +69,7 @@
             result = toWgs84(parsed, source);
             marker?.remove();
             marker = new L.Marker([result.lat, result.lon], { icon: markers.pulsatingIcon }).addTo(map);
-            map.setView([result.lat, result.lon], 11);
+            map.setView([result.lat, result.lon], locationZoom);
         } catch (cause) {
             error = cause instanceof Error ? cause.message : '坐标转换失败';
         }
